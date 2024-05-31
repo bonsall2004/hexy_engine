@@ -8,10 +8,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../../binaries)
 set(CMAKE_CXX_STANDARD 23)
 
 set(SOURCES ../Temp/entry.cpp ../Temp/WindowHandler/WindowHandler.cpp ../Temp/WindowHandler/ViewportCamera.cpp)
-set(HEADERS
-    ../Temp/temp_shader.cpp)
 
-add_executable(${EXECUTABLE_NAME} ${SOURCES} ${HEADERS})
+add_executable(${EXECUTABLE_NAME} ${SOURCES})
 
 find_package(OpenGL REQUIRED)
 

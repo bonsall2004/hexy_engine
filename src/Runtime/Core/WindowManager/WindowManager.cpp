@@ -4,7 +4,7 @@
  * Description: 
  */
 #include "WindowManager.hpp"
-#include "glad/glad.h"
+#include "../../../../deps/glfw/deps/linmath.h"
 #include <iostream>
 
 namespace hexy::runtime::core
@@ -21,8 +21,14 @@ namespace hexy::runtime::core
       return false;
     }
     glfwSetErrorCallback(default_error_callback);
+    bool success = create_window();
 
-    return create_window();
+    gladLoadGL();
+
+    m_shaderManager = new rendering::ShaderManager();
+    m_shaderManager->init();
+
+    return success;
   }
 
   GLFWwindow* WindowManager::get_window() const
@@ -43,7 +49,6 @@ namespace hexy::runtime::core
     }
 
     glfwMakeContextCurrent(window);
-    gladLoadGL();
 //    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     glfwSetKeyCallback(window, key_callback);
 
@@ -70,7 +75,8 @@ namespace hexy::runtime::core
 
   void WindowManager::render()
   {
-
+    glBindVertexArray(m_shaderManager->get_vertex_arrays());
+    glDrawArrays(GL_TRIANGLES, 0, 3);
   }
 
   void WindowManager::pre_render()
@@ -83,6 +89,8 @@ namespace hexy::runtime::core
 
     while(!glfwWindowShouldClose(window))
     {
+
+
       this->pre_render();
 
       glfwPollEvents();
@@ -93,6 +101,9 @@ namespace hexy::runtime::core
 
       this->post_render();
     }
+
+    m_shaderManager->cleanup();
+    free(m_shaderManager);
 
     glfwTerminate();
 

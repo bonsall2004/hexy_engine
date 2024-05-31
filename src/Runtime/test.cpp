@@ -105,6 +105,7 @@ int main(void)
   GLuint vertex_array;
   glGenVertexArrays(1, &vertex_array);
   glBindVertexArray(vertex_array);
+
   glEnableVertexAttribArray(vpos_location);
   glVertexAttribPointer(vpos_location, 2, GL_FLOAT, GL_FALSE,
     sizeof(Vertex), (void*) offsetof(Vertex, pos));

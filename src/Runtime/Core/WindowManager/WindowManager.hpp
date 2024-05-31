@@ -4,7 +4,9 @@
  * Description: 
  */
 #pragma once
+#include "glad/glad.h"
 #include "GLFW/glfw3.h"
+#include "../ShaderManager.hpp"
 #include <string>
 #include <cstdint>
 #include <thread>
@@ -42,10 +44,11 @@ namespace hexy::runtime::core
       bool create_window();
 
     private:
+      rendering::ShaderManager* m_shaderManager;
       std::string title;
 
-      uint16_t width;
-      uint16_t height;
+      int width;
+      int height;
 
       bool resizable = true;
       bool vsync = true;
