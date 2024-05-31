@@ -1,4 +1,2 @@
-cmake_minimum_required(VERSION 3.5)
-project(hexy)
-
-add_subdirectory(hexy_executable)
+add_subdirectory(Editor)
+add_subdirectory(Runtime)
