@@ -4,31 +4,24 @@
  * Description: 
  */
 #pragma once
-#include <chrono>
+#include <WindowManager/WindowManager.hpp>
 #include <thread>
-#include "../WindowManager/WindowManager.hpp"
 
-namespace hexy::runtime::core
-{
-  class EngineManager
-  {
+namespace hexy::runtime::core {
+
+  class EngineManager {
     public:
       EngineManager();
-
       bool init();
       bool start();
       void cleanup();
-
       void join_active_threads();
-
       [[nodiscard]] WindowManager* get_window_manager() const;
-
-    protected:
+      [[nodiscard]] const std::thread& get_window_manager_thread() const;
 
     private:
       WindowManager* m_windowManager;
       std::thread window_manager_thread;
-    public:
-      const std::thread& get_window_manager_thread() const;
   };
-} // hexy
+
+} // namespace hexy::runtime::core

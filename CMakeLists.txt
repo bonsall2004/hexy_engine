@@ -3,4 +3,3 @@ project(hexy_engine)
 
 add_subdirectory(deps)
 add_subdirectory(src)
-

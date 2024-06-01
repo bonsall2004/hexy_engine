@@ -4,58 +4,46 @@
  * Description: 
  */
 #pragma once
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
-#include "../ShaderManager.hpp"
 #include <string>
-#include <cstdint>
 #include <thread>
+#include <Rendering/Shaders/ShaderManager.hpp>
+#include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 
-namespace hexy::runtime::core
-{
-  class WindowManager
-  {
+namespace hexy::runtime::core {
+
+  class WindowManager {
     public:
-      explicit WindowManager(uint16_t width = 800, uint16_t height = 600, std::string window_name = "Untitled", bool resize = true, bool vsync = true);
+      WindowManager(uint16_t width, uint16_t height, std::string window_name, bool resize, bool vsync);
 
       bool init();
       std::thread begin();
-
-      [[nodiscard]] GLFWwindow* get_window() const;
-      [[nodiscard]] bool is_resizable() const;
-      [[nodiscard]] bool is_vsync() const;
-
       void cleanup();
 
-      void set_resizable(bool resizable);
-      void set_vsync(bool vsync);
+      [[nodiscard]] bool is_resizable() const;
+      void set_resizable(bool _resizable);
+      [[nodiscard]] bool is_vsync() const;
+      void set_vsync(bool _vsync);
       void set_exit_callback(void(*callback)());
 
-    protected:
+    private:
+      bool create_window();
+      void render();
+      void pre_render();
+      void post_render();
+
+      static void key_callback(GLFWwindow* window, int key, int scan_code, int action, int mods);
       static void default_error_callback(int error_code, const char* description);
       static void default_framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
-      virtual void pre_render();
-      virtual void render();
-      virtual void post_render();
-
-      static void key_callback(GLFWwindow* window, int key, int scan_code, int action, int mods);
-
-      bool create_window();
-
-    private:
-      rendering::ShaderManager* m_shaderManager;
+      uint16_t width;
+      uint16_t height;
       std::string title;
-
-      int width;
-      int height;
-
-      bool resizable = true;
-      bool vsync = true;
-
-      void(* exit_callback)();
-
+      bool resizable;
+      bool vsync;
       GLFWwindow* window;
-
+      void(*exit_callback)() = nullptr;
+      hexy::rendering::ShaderManager* m_shaderManager;
+      glm::mat4 mvp; // Add MVP matrix
   };
 }

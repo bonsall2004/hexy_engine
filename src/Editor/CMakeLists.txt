@@ -7,7 +7,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../../binaries)
 
 set(CMAKE_CXX_STANDARD 23)
 
-set(SOURCES ../Temp/entry.cpp ../Temp/WindowHandler/WindowHandler.cpp ../Temp/WindowHandler/ViewportCamera.cpp)
+set(SOURCES ./entry.cpp)
 
 add_executable(${EXECUTABLE_NAME} ${SOURCES})
 

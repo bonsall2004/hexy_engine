@@ -17,13 +17,17 @@ set(SOURCES main.cpp
     Core/Rendering/RenderManager.hpp
     Core/Engine/EngineManager.cpp
     Core/Engine/EngineManager.hpp
-    Core/ShaderManager.cpp
-    Core/ShaderManager.hpp)
+    Core/Rendering/Shaders/ShaderManager.cpp
+    Core/Rendering/Shaders/ShaderManager.hpp
+    Core/ObjectLoader/ObjectLoader.cpp
+    Core/ObjectLoader/ObjectLoader.hpp)
+
+include_directories("../../include" "./Core")
 
 add_executable(${EXECUTABLE_NAME} ${SOURCES})
 
 find_package(OpenGL REQUIRED)
 
-target_include_directories(${EXECUTABLE_NAME} PRIVATE "../../deps/glfw/include" "../../deps/glm/" "../../deps/glad/include")
+target_include_directories(${EXECUTABLE_NAME} PRIVATE "../../deps/glfw/include" "../../deps/glfw/deps" "../../deps/glm/" "../../deps/glad/include")
 
 target_link_libraries(${EXECUTABLE_NAME} PRIVATE ${OPENGL_LIBRARIES} glfw glm glad)
