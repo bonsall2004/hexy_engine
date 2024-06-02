@@ -8,7 +8,8 @@
 #include <vector>
 #include <glm/glm.hpp>
 
-class ObjectLoader {
+class ObjectLoader
+{
   public:
     bool load(const std::string& filename);
     [[nodiscard]] const std::vector<glm::vec3>& get_vertices() const;

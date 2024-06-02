@@ -10,9 +10,11 @@
 #include <vector>
 #include <ObjectLoader/ObjectLoader.hpp>
 
-namespace hexy::rendering {
+namespace hexy::rendering
+{
 
-  class ShaderManager {
+  class ShaderManager
+  {
     public:
       ShaderManager();
       ~ShaderManager();

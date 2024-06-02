@@ -9,10 +9,12 @@
 #include <Rendering/Shaders/ShaderManager.hpp>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
+#include <Components/ComponentManager.hpp>
 
-namespace hexy::runtime::core {
-
-  class WindowManager {
+namespace hexy::runtime::core
+{
+  class WindowManager
+  {
     public:
       WindowManager(uint16_t width, uint16_t height, std::string window_name, bool resize, bool vsync);
 
@@ -24,7 +26,9 @@ namespace hexy::runtime::core {
       void set_resizable(bool _resizable);
       [[nodiscard]] bool is_vsync() const;
       void set_vsync(bool _vsync);
-      void set_exit_callback(void(*callback)());
+      void set_exit_callback(void(* callback)());
+
+      ComponentManager componentManager;
 
     private:
       bool create_window();
@@ -42,8 +46,7 @@ namespace hexy::runtime::core {
       bool resizable;
       bool vsync;
       GLFWwindow* window;
-      void(*exit_callback)() = nullptr;
-      hexy::rendering::ShaderManager* m_shaderManager;
-      glm::mat4 mvp; // Add MVP matrix
+      void (* exit_callback)() = nullptr;
+      glm::mat4 mvp;
   };
 }

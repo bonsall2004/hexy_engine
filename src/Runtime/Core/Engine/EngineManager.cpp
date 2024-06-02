@@ -29,6 +29,7 @@ namespace hexy::runtime::core {
       window_manager_thread.join();
     }
     delete m_windowManager;
+    clear_objects();
   }
 
   void EngineManager::join_active_threads() {
@@ -45,4 +46,18 @@ namespace hexy::runtime::core {
     return window_manager_thread;
   }
 
-} // namespace hexy::runtime::core
+  void EngineManager::add_object(std::shared_ptr<ObjectBase> object) {
+    m_objects.push_back(object);
+  }
+
+  void EngineManager::remove_object(std::shared_ptr<ObjectBase> object) {
+    m_objects.erase(std::remove(m_objects.begin(), m_objects.end(), object), m_objects.end());
+  }
+
+  void EngineManager::clear_objects() {
+    for (auto& object : m_objects) {
+      object->cleanup();
+    }
+    m_objects.clear();
+  }
+}

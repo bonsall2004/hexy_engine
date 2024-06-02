@@ -1,21 +1,26 @@
-/*
- * hexy_engine
- * Author: bonsall2004
- * Description: 
- */
-#include "Core/WindowManager/WindowManager.hpp"
-#include "Core/Engine/EngineManager.hpp"
+#include <Engine/EngineManager.hpp>
+#include <ObjectLoader/ObjectLoader.hpp> // Include ObjectLoader header
+#include <Test.hpp>
 
+using namespace hexy::runtime::core;
 
-using namespace hexy::runtime;
+int main() {
+  EngineManager engineManager;
 
+  if (!engineManager.init()) {
+    return -1;
+  }
 
-int main()
-{
-  auto* EngineManager = new core::EngineManager();
-  EngineManager->init();
-  EngineManager->start();
-  EngineManager->join_active_threads();
-  free(EngineManager);
+  // Create and add objects
+
+  engineManager.add_object(std::make_shared<TestOBJ>());
+
+  if (!engineManager.start()) {
+    return -1;
+  }
+
+  engineManager.join_active_threads();
+  engineManager.cleanup();
+
   return 0;
 }

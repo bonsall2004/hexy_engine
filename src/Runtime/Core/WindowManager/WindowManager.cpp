@@ -10,7 +10,7 @@
 namespace hexy::runtime::core {
 
   WindowManager::WindowManager(uint16_t width, uint16_t height, std::string window_name, bool resize, bool vsync)
-    : width(width), height(height), title(std::move(window_name)), resizable(resize), vsync(vsync), window(nullptr), m_shaderManager(nullptr) {}
+    : width(width), height(height), title(std::move(window_name)), resizable(resize), vsync(vsync), window(nullptr) {}
 
   bool WindowManager::init() {
     if (!glfwInit()) {
@@ -25,13 +25,9 @@ namespace hexy::runtime::core {
       return false;
     }
 
-    m_shaderManager = new hexy::rendering::ShaderManager();
-    m_shaderManager->init();
-    m_shaderManager->load_object("armadillo.obj");
-
     glm::mat4 projection = glm::perspective(glm::radians(45.0f), float(width) / float(height), 0.1f, 100.0f);
-    glm::mat4 view = glm::lookAt(glm::vec3(10, 0, -4), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
-    auto model = glm::mat4(1.0f);
+    glm::mat4 view = glm::lookAt(glm::vec3(4, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+    glm::mat4 model = glm::mat4(1.0f);
     mvp = projection * view * model;
 
     return success;
@@ -66,16 +62,14 @@ namespace hexy::runtime::core {
   }
 
   void WindowManager::post_render() {
-
   }
 
   void WindowManager::render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    m_shaderManager->render(mvp); /
+    componentManager.render_all(mvp);
   }
 
   void WindowManager::pre_render() {
-
   }
 
   std::thread WindowManager::begin() {
@@ -87,8 +81,7 @@ namespace hexy::runtime::core {
       this->post_render();
     }
 
-    m_shaderManager->cleanup();
-    delete m_shaderManager;
+    componentManager.cleanup_all();
 
     glfwTerminate();
 

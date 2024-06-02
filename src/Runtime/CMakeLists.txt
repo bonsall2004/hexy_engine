@@ -12,7 +12,7 @@ set(SOURCES main.cpp
     Core/WindowManager/WindowManager.hpp
     Core/Engine/EngineManager.cpp
     Core/Engine/EngineManager.hpp
-    Core/Rendering/IRenderer.hpp
+    Core/Rendering/Renderer.hpp
     Core/Rendering/RenderManager.cpp
     Core/Rendering/RenderManager.hpp
     Core/Engine/EngineManager.cpp
@@ -20,9 +20,20 @@ set(SOURCES main.cpp
     Core/Rendering/Shaders/ShaderManager.cpp
     Core/Rendering/Shaders/ShaderManager.hpp
     Core/ObjectLoader/ObjectLoader.cpp
-    Core/ObjectLoader/ObjectLoader.hpp)
+    Core/ObjectLoader/ObjectLoader.hpp
+    Core/Entities/ObjectBase.hpp
+    Core/Components/ComponentManager.hpp
+    Core/Components/ComponentManager.cpp
+    Core/Entities/Object.hpp
+    Core/Components/ComponentBase.hpp
+    Core/Datatypes/Transform.hpp
+    Core/Components/SceneComponent.cpp
+    Core/Components/SceneComponent.hpp
+    Core/Components/Meshes/StaticMeshComponent.cpp
+    Core/Components/Meshes/StaticMeshComponent.hpp
+    Core/Entities/Test.hpp)
 
-include_directories("../../include" "./Core")
+include_directories("../../include" "./Core" "./Core/Entities" "./Core/Datatypes")
 
 add_executable(${EXECUTABLE_NAME} ${SOURCES})
 
