@@ -11,15 +11,14 @@
 #include <glm/glm.hpp>
 #include <glad/glad.h>
 
-namespace hexy::runtime::core { // this file is a shit hole and im gunna fix it when i can be fucked
-  class StaticMeshComponent : public ComponentBase {
+namespace hexy::runtime::core
+{ // this file is a shit hole and im gunna fix it when i can be fucked
+  class StaticMeshComponent : public ComponentBase
+  {
     public:
-      void load(const std::string& path) override {
-        vertices = {
-          { -0.5f, -0.5f, 0.0f },
-          { 0.5f, -0.5f, 0.0f },
-          { 0.0f, 0.5f, 0.0f }
-        };
+      void load(const std::string& path) override
+      {
+        vertices = { { -0.5f, -0.5f, 0.0f }, { 0.5f, -0.5f, 0.0f }, { 0.0f, 0.5f, 0.0f } };
         glGenVertexArrays(1, &vao);
         glGenBuffers(1, &vbo);
 
@@ -34,13 +33,15 @@ namespace hexy::runtime::core { // this file is a shit hole and im gunna fix it 
         glBindVertexArray(0);
       }
 
-      void draw(const glm::mat4& mvp) override {
+      void draw(const glm::mat4& mvp) override
+      {
         glBindVertexArray(vao);
         glDrawArrays(GL_TRIANGLES, 0, vertices.size());
         glBindVertexArray(0);
       }
 
-      void cleanup() override {
+      void cleanup() override
+      {
         glDeleteVertexArrays(1, &vao);
         glDeleteBuffers(1, &vbo);
       }

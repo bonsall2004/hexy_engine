@@ -7,8 +7,10 @@
 #include <glm/glm.hpp>
 #include <string>
 
-namespace hexy::runtime::core {
-  class ComponentBase {
+namespace hexy::runtime::core
+{
+  class ComponentBase
+  {
     public:
       virtual ~ComponentBase() = default;
       virtual void load(const std::string& path) = 0;

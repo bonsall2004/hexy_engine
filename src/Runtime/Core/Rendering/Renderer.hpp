@@ -8,7 +8,6 @@
 
 namespace hexy::rendering
 {
-
   class Renderer
   {
     public:
@@ -17,5 +16,4 @@ namespace hexy::rendering
       virtual void render(const glm::mat4& mvp) = 0;
       virtual void cleanup() = 0;
   };
-
 }

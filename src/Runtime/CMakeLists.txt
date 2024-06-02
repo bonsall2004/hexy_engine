@@ -29,9 +29,9 @@ set(SOURCES main.cpp
     Core/Datatypes/Transform.hpp
     Core/Components/SceneComponent.cpp
     Core/Components/SceneComponent.hpp
-    Core/Components/Meshes/StaticMeshComponent.cpp
     Core/Components/Meshes/StaticMeshComponent.hpp
-    Core/Entities/Test.hpp)
+    Core/Entities/Test.hpp
+    Core/Datatypes/Transform.cpp)
 
 include_directories("../../include" "./Core" "./Core/Entities" "./Core/Datatypes")
 

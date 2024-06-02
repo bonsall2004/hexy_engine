@@ -1,29 +1,32 @@
 /*
  * hexy_engine
  * Author: bonsall2004
- * Description: 
+ * Description:
  */
 #pragma once
 #include <glm/glm.hpp>
 #include <vector>
 #include <string>
 #include <memory>
-#include "ComponentBase.hpp"
+#include <Transform.hpp>
 
-namespace hexy::runtime::core {
-  class ObjectBase {
+namespace hexy::runtime::core
+{
+  class ComponentBase;
+
+  class ObjectBase
+  {
     public:
-
-      virtual ~ObjectBase() = default;
-      void add_component(std::shared_ptr<ComponentBase> component) {
-        components.push_back(component);
+      ObjectBase()
+      {
+        components = {};
       }
-
-      virtual void cleanup() = 0;
+      virtual ~ObjectBase() = default;
       virtual void load(const std::string& path) = 0;
       virtual void draw(const glm::mat4& mvp) = 0;
+      virtual void cleanup() = 0;
 
-    protected:
+      std::shared_ptr<HTransform> transform;
       std::vector<std::shared_ptr<ComponentBase>> components;
   };
 }

@@ -1,34 +1,37 @@
 /*
  * hexy_engine
  * Author: bonsall2004
- * Description: 
+ * Description:
  */
 #pragma once
-#include <WindowManager/WindowManager.hpp>
-#include <Object.hpp>
-#include <ObjectLoader/ObjectLoader.hpp>
-#include <thread>
-#include <vector>
 #include <memory>
+#include <vector>
+#include "WindowManager/WindowManager.hpp"
+#include "ObjectBase.hpp"
 
-namespace hexy::runtime::core {
-  class EngineManager {
+namespace hexy::runtime::core
+{
+  class EngineManager
+  {
     public:
       EngineManager();
       bool init();
       bool start();
       void cleanup();
       void join_active_threads();
-      [[nodiscard]] WindowManager* get_window_manager() const;
-      const std::thread& get_window_manager_thread() const;
-
       void add_object(std::shared_ptr<ObjectBase> object);
-      void remove_object(std::shared_ptr<ObjectBase> object);
-      void clear_objects();
+      [[nodiscard]] WindowManager* get_window_manager() const;
+      [[nodiscard]] const std::thread& get_window_manager_thread() const;
+      [[nodiscard]] WindowManager* get_m_window_manager() const;
+      [[nodiscard]] ComponentManager* get_m_component_manager() const;
 
     private:
       WindowManager* m_windowManager;
+      ComponentManager* m_componentManager;
+      ObjectLoader* m_objectLoader;
+
+
       std::thread window_manager_thread;
-      std::vector<std::shared_ptr<ObjectBase>> m_objects;
+      std::vector<std::shared_ptr<ObjectBase>> objects;
   };
 }

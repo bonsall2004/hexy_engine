@@ -1,21 +1,35 @@
-#include <Engine/EngineManager.hpp>
-#include <ObjectLoader/ObjectLoader.hpp> // Include ObjectLoader header
+/*
+ * hexy_engine
+ * Author: bonsall2004
+ * Description:
+ */
+#include <iostream>
+#include <memory>
+#include "Engine/EngineManager.hpp"
 #include <Test.hpp>
+#include <ObjectBase.hpp>
 
 using namespace hexy::runtime::core;
 
-int main() {
-  EngineManager engineManager;
+int main()
+{
+  hexy::runtime::core::EngineManager engineManager;
 
-  if (!engineManager.init()) {
+  if(!engineManager.init())
+  {
+    std::cerr << "Failed to initialize engine" << std::endl;
     return -1;
   }
 
-  // Create and add objects
+  auto testObj = std::make_shared<TestOBJ>();
+  testObj->load("armadillo.obj");
+  testObj->transform = std::make_shared<hexy::runtime::core::HTransform>();
+  testObj->transform->position = glm::vec3(0.0f, 0.0f, -5.0f);
+  engineManager.add_object(testObj);
 
-  engineManager.add_object(std::make_shared<TestOBJ>());
-
-  if (!engineManager.start()) {
+  if(!engineManager.start())
+  {
+    std::cerr << "Failed to start engine" << std::endl;
     return -1;
   }
 
