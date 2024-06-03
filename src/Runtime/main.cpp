@@ -22,7 +22,6 @@ int main()
   }
 
   auto testObj = std::make_shared<TestOBJ>();
-  testObj->load("armadillo.obj");
   testObj->transform = std::make_shared<hexy::runtime::core::HTransform>();
   testObj->transform->position = glm::vec3(0.0f, 0.0f, -5.0f);
   engineManager.add_object(testObj);

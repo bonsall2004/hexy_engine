@@ -19,7 +19,7 @@ namespace hexy::runtime::core
       bool start();
       void cleanup();
       void join_active_threads();
-      void add_object(std::shared_ptr<ObjectBase> object);
+      void add_object(const std::shared_ptr<ObjectBase>& object);
       [[nodiscard]] WindowManager* get_window_manager() const;
       [[nodiscard]] const std::thread& get_window_manager_thread() const;
       [[nodiscard]] WindowManager* get_m_window_manager() const;
@@ -28,8 +28,7 @@ namespace hexy::runtime::core
     private:
       WindowManager* m_windowManager;
       ComponentManager* m_componentManager;
-      ObjectLoader* m_objectLoader;
-
+      ObjectParser* m_objectLoader;
 
       std::thread window_manager_thread;
       std::vector<std::shared_ptr<ObjectBase>> objects;

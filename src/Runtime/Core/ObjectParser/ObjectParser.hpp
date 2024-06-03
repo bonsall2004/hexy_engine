@@ -8,7 +8,7 @@
 #include <vector>
 #include <glm/glm.hpp>
 
-class ObjectLoader
+class ObjectParser
 {
   public:
     bool load(const std::string& filename);

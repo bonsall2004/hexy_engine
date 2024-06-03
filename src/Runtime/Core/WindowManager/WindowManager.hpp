@@ -7,9 +7,10 @@
 #include <string>
 #include <thread>
 #include <Rendering/Shaders/ShaderManager.hpp>
-#include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
 #include <Components/ComponentManager.hpp>
+#include <ObjectBase.hpp>
+#include <glm/glm.hpp>
+#include <GLFW/glfw3.h>
 
 namespace hexy::runtime::core
 {
@@ -29,9 +30,11 @@ namespace hexy::runtime::core
       void set_exit_callback(void(* callback)());
 
       ComponentManager componentManager;
+      std::vector<std::shared_ptr<ObjectBase>> objects;
 
     private:
       bool create_window();
+
       void render();
       void pre_render();
       void post_render();

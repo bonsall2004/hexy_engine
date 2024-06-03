@@ -46,9 +46,9 @@ namespace hexy::runtime::core
     }
   }
 
-  void EngineManager::add_object(std::shared_ptr<ObjectBase> object)
+  void EngineManager::add_object(const std::shared_ptr<ObjectBase>& object)
   {
-    objects.push_back(object);
+    m_windowManager->objects.push_back(object);
   }
 
   WindowManager* EngineManager::get_window_manager() const

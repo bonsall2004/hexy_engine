@@ -17,16 +17,11 @@ namespace hexy::runtime::core
   class ObjectBase
   {
     public:
-      ObjectBase()
-      {
-        components = {};
-      }
       virtual ~ObjectBase() = default;
-      virtual void load(const std::string& path) = 0;
+      virtual void load() = 0;
       virtual void draw(const glm::mat4& mvp) = 0;
       virtual void cleanup() = 0;
+    protected:
 
-      std::shared_ptr<HTransform> transform;
-      std::vector<std::shared_ptr<ComponentBase>> components;
   };
 }

@@ -19,8 +19,8 @@ set(SOURCES main.cpp
     Core/Engine/EngineManager.hpp
     Core/Rendering/Shaders/ShaderManager.cpp
     Core/Rendering/Shaders/ShaderManager.hpp
-    Core/ObjectLoader/ObjectLoader.cpp
-    Core/ObjectLoader/ObjectLoader.hpp
+    Core/ObjectParser/ObjectParser.cpp
+    Core/ObjectParser/ObjectParser.hpp
     Core/Entities/ObjectBase.hpp
     Core/Components/ComponentManager.hpp
     Core/Components/ComponentManager.cpp
@@ -31,7 +31,9 @@ set(SOURCES main.cpp
     Core/Components/SceneComponent.hpp
     Core/Components/Meshes/StaticMeshComponent.hpp
     Core/Entities/Test.hpp
-    Core/Datatypes/Transform.cpp)
+    Core/Datatypes/Transform.cpp
+    Core/Components/Meshes/StaticMeshComponent.cpp
+    )
 
 include_directories("../../include" "./Core" "./Core/Entities" "./Core/Datatypes")
 

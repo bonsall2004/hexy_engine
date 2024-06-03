@@ -13,8 +13,8 @@ namespace hexy::runtime::core
   {
     public:
       virtual ~ComponentBase() = default;
-      virtual void load(const std::string& path) = 0;
-      virtual void draw(const glm::mat4& mvp) = 0;
+      virtual void load() = 0;
+      virtual void draw() = 0;
       virtual void cleanup() = 0;
   };
 }

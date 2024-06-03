@@ -3,12 +3,12 @@
  * Author: bonsall2004
  * Description: 
  */
-#include "ObjectLoader.hpp"
+#include "ObjectParser.hpp"
 #include <fstream>
 #include <sstream>
 #include <iostream>
 
-bool ObjectLoader::load(const std::string& filename)
+bool ObjectParser::load(const std::string& filename)
 {
   std::ifstream file(filename);
   if(!file.is_open())
@@ -41,7 +41,7 @@ bool ObjectLoader::load(const std::string& filename)
   return true;
 }
 
-void ObjectLoader::parse_vertex(const std::string& line)
+void ObjectParser::parse_vertex(const std::string& line)
 {
   std::istringstream s(line.substr(2));
   glm::vec3 vertex;
@@ -49,7 +49,7 @@ void ObjectLoader::parse_vertex(const std::string& line)
   vertices.push_back(vertex);
 }
 
-void ObjectLoader::parse_texcoord(const std::string& line)
+void ObjectParser::parse_texcoord(const std::string& line)
 {
   std::istringstream s(line.substr(3));
   glm::vec2 texcoord;
@@ -57,7 +57,7 @@ void ObjectLoader::parse_texcoord(const std::string& line)
   texcoords.push_back(texcoord);
 }
 
-void ObjectLoader::parse_normal(const std::string& line)
+void ObjectParser::parse_normal(const std::string& line)
 {
   std::istringstream s(line.substr(3));
   glm::vec3 normal;
@@ -65,7 +65,7 @@ void ObjectLoader::parse_normal(const std::string& line)
   normals.push_back(normal);
 }
 
-void ObjectLoader::parse_face(const std::string& line)
+void ObjectParser::parse_face(const std::string& line)
 {
   std::istringstream s(line.substr(2));
   std::string vertex_info;
@@ -81,22 +81,22 @@ void ObjectLoader::parse_face(const std::string& line)
   }
 }
 
-const std::vector<glm::vec3>& ObjectLoader::get_vertices() const
+const std::vector<glm::vec3>& ObjectParser::get_vertices() const
 {
   return vertices;
 }
 
-const std::vector<glm::vec2>& ObjectLoader::get_texcoords() const
+const std::vector<glm::vec2>& ObjectParser::get_texcoords() const
 {
   return texcoords;
 }
 
-const std::vector<glm::vec3>& ObjectLoader::get_normals() const
+const std::vector<glm::vec3>& ObjectParser::get_normals() const
 {
   return normals;
 }
 
-const std::vector<unsigned int>& ObjectLoader::get_indices() const
+const std::vector<unsigned int>& ObjectParser::get_indices() const
 {
   return indices;
 }

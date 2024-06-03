@@ -62,7 +62,7 @@ namespace hexy::rendering
 
   [[maybe_unused]] void ShaderManager::load_object(const std::string& filename)
   {
-    if(!object_loader.load(filename))
+    if(!object_parser.load(filename))
     {
       std::cerr << "Failed to load object: " << filename << std::endl;
       return;
@@ -75,12 +75,12 @@ namespace hexy::rendering
     glBindVertexArray(vertex_array);
 
     glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
-    glBufferData(GL_ARRAY_BUFFER, object_loader.get_vertices()
-      .size() * sizeof(glm::vec3), object_loader.get_vertices().data(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, object_parser.get_vertices()
+      .size() * sizeof(glm::vec3), object_parser.get_vertices().data(), GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_buffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, object_loader.get_indices()
-      .size() * sizeof(unsigned int), object_loader.get_indices().data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, object_parser.get_indices()
+      .size() * sizeof(unsigned int), object_parser.get_indices().data(), GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (void*)0);
@@ -94,7 +94,7 @@ namespace hexy::rendering
     glUniformMatrix4fv(mvp_location, 1, GL_FALSE, &mvp[0][0]);
 
     glBindVertexArray(vertex_array);
-    glDrawElements(GL_TRIANGLES, object_loader.get_indices().size(), GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, object_parser.get_indices().size(), GL_UNSIGNED_INT, 0);
   }
 
   void ShaderManager::cleanup()

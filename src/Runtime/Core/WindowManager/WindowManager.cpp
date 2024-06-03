@@ -72,12 +72,16 @@ namespace hexy::runtime::core
 
   void WindowManager::post_render()
   {
+
   }
 
   void WindowManager::render()
   {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    componentManager.render_all(mvp);
+    for(auto obj : objects)
+    {
+      obj->draw(mvp);
+    }
   }
 
   void WindowManager::pre_render()
@@ -86,6 +90,11 @@ namespace hexy::runtime::core
 
   std::thread WindowManager::begin()
   {
+    for(auto obj : objects)
+    {
+      obj->load();
+    }
+
     while(!glfwWindowShouldClose(window))
     {
       this->pre_render();

@@ -17,7 +17,6 @@ namespace hexy::runtime::core
   void ComponentManager::add_object(std::shared_ptr<ObjectBase> object)
   {
     objects.push_back(object);
-    object->load("armadillo.obj");
   }
 
   void ComponentManager::render_all(const glm::mat4& mvp)

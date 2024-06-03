@@ -8,11 +8,10 @@
 #include <string>
 #include <glm/glm.hpp>
 #include <vector>
-#include <ObjectLoader/ObjectLoader.hpp>
+#include <ObjectParser/ObjectParser.hpp>
 
 namespace hexy::rendering
 {
-
   class ShaderManager
   {
     public:
@@ -31,9 +30,8 @@ namespace hexy::rendering
       GLuint vertex_buffer;
       GLuint index_buffer;
       GLint mvp_location;
-      ObjectLoader object_loader;
+      ObjectParser object_parser;
 
       static void check_shader_compile_error(GLuint shader, const std::string& type);
   };
-
 } // namespace hexy::rendering
